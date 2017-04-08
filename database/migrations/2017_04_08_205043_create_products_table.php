@@ -22,8 +22,8 @@ class CreateProductsTable extends Migration
             $table->integer('category_id');
             $table->integer('brand_id');
             $table->timestamps();
-            $table->string('created_at_ip');
-            $table->string('updated_at_ip');
+            $table->string('created_at_ip')->nullable();
+            $table->string('updated_at_ip')->nullable();
         });
     }
 

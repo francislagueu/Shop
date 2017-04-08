@@ -17,8 +17,8 @@ class CreateBrandsTable extends Migration
             $table->increments('id');
             $table->string('name', 255)->unique();
             $table->timestamps();
-            $table->string('created_at_ip');
-            $table->string('updated_at_ip');
+            $table->string('created_at_ip')->nullable();
+            $table->string('updated_at_ip')->nullable();
         });
     }
 

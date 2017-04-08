@@ -11,6 +11,8 @@
 |
 */
 
+use Illuminate\Support\Facades\Route;
+
 Route::get('/', 'Front@index');
 Route::get('/products', 'Front@products');
 Route::get('/product/details/{id}', 'Front@product_details');
@@ -26,4 +28,21 @@ Route::get('/checkout', 'Front@checkout');
 Route::get('/search/{query}', 'Front@search');
 Route::get('/blade', function(){
     return view('page', array('name'=>'The Raven', 'day'=>'Friday'));
+});
+Route::get('/insert', function(){
+   $categry = App\Category::create(array('name'=>'Music', 'created_at_ip'=>'now', 'updated_at_ip'=>'now'));
+   $categry->save();
+   return 'category added';
+});
+Route::get('/read', function(){
+    $category = new App\Category();
+    $data = $category->all(array('name', 'id'));
+    foreach ($data as $list){
+        echo $list->id .' '.$list->name.'<br>';
+    }
+});
+Route::get('/update', function(){
+   $category = App\Categry::find(6);
+   $category->name = 'HEAVY METAL';
+   $category->save();
 });

@@ -42,7 +42,20 @@ Route::get('/read', function(){
     }
 });
 Route::get('/update', function(){
-   $category = App\Categry::find(6);
+   $category = App\Category::find(6);
    $category->name = 'HEAVY METAL';
    $category->save();
+    $data = $category->all(array('name', 'id'));
+    foreach ($data as $list){
+        echo $list->id .' '.$list->name.'<br>';
+    }
+});
+
+Route::get('/delete', function (){
+    $category = App\Category::find(6);
+    $category->delete();
+    $data = $category->all(array('name', 'id'));
+    foreach ($data as $list){
+        echo $list->id .' '.$list->name.'<br>';
+    }
 });

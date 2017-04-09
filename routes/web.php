@@ -59,3 +59,5 @@ Route::get('/delete', function (){
         echo $list->id .' '.$list->name.'<br>';
     }
 });
+
+Route::post('/cart', 'Front@cart');

@@ -5,8 +5,9 @@ namespace App\Http\Controllers;
 use App\Brand;
 use App\Category;
 use App\Product;
-use Illuminate\Http\Request;
-
+#use Illuminate\Http\Request;
+use Cart ;
+use Illuminate\Support\Facades\Request;
 class Front extends Controller
 {
     var $brands;
@@ -54,7 +55,14 @@ class Front extends Controller
         return view('logout', array('page'=>'home', 'title'=>'Welcome', 'description'=>''));
     }
     public function cart(){
-        return view('cart', array('page'=>'home', 'title'=>'Welcome', 'description'=>''));
+
+        if(Request::isMethod('post')){
+            $product_id = Request::get('product_id');
+            $product = Product::find($product_id);
+            Cart::add(array('id'=>$product_id, 'name'=>$product->name, 'qty'=>1, 'price'=>$product->price));
+        }
+        $cart = Cart::content();
+        return view('cart', array('page'=>'home', 'title'=>'Welcome', 'description'=>'', 'cart'=>$cart));
     }
 
     public function checkout(){
